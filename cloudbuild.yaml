@@ -1,16 +1,18 @@
 steps:
   # Java App Build
-  # - name: maven:3-jdk-8
-  #   entrypoint: 'mvn'
-  #   args: ['clean', 'package', '-DskipTests']
+  - name: maven:3-jdk-8
+    entrypoint: 'mvn'
+    args: ['clean', 'package', '-DskipTests']
   # Docker Image Build
   - name: gcr.io/cloud-builders/docker
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/catask-image', '--build-arg=JAR_FILE=target/spring-boot-web.jar', '.']
+    # args: ['build', '-t', 'gcr.io/${PROJECT_ID}/catask-image', '--build-arg=JAR_FILE=target/spring-boot-web.jar', '.']
+    # images: ['gcr.io/${PROJECT_ID}/']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/$_REPO_NAME/catask-image', '--build-arg=JAR_FILE=target/spring-boot-web.jar', '.']
     images: ['gcr.io/${PROJECT_ID}/']
   # Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/catask-docker-repo/catask-image']
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/$_REPO_NAME/catask-image']
+    # args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/catask-docker-repo/catask-image']
   # deploy container image to GKE
 # deploy container image to GKE
   # - name: "gcr.io/cloud-builders/gke-deploy"
