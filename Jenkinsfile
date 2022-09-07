@@ -12,9 +12,10 @@ pipeline {
                 sh 'mvn -Dmaven.test.skip clean package'
             }
         }
-        stage('Test') {
+        stage('Build Image') {
             steps {
-                echo 'Testing..'
+                echo 'Building Docker Image ..'
+                sh  'docker build -t gahmed/catask-app-1.0 .'
             }
         }
         stage('Deploy') {
