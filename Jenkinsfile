@@ -12,23 +12,28 @@ pipeline {
                 sh 'mvn -Dmaven.test.skip clean package'
             }
         }
+        stage('Test') {
+            steps {
+                echo 'Testing Maven Project ...'
+                sh 'mvn test'
+            }
+        }
         stage('Build Image') {
             steps {
                 echo 'Building Docker Image ..'
-                sh  'docker build -t gahmed/catask-app-1.0 .'
+                sh  "docker build -t gahmed/catask-app:${env.BUILD_ID}"
             }
         }
         stage('Push Docker Image To DockerHub') {
             steps {
                 echo 'Pushing Docker Image to Dockerhub....'
-                sh 'docker tag gahmed/catask-app-1.0  gahmed/catask-app:latest'
+                sh "docker tag gahmed/catask-app:${env.BUILD_ID}  gahmed/catask-app:${env.BUILD_ID}"
                 withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
-                // some block
+                    // some block
                     /* groovylint-disable-next-line GStringExpressionWithinString */
                     sh 'docker login -u gahmed -p ${dockerhubpwd}'
-                    sh 'docker push gahmed/catask-app:latest'
+                    sh "docker push gahmed/catask-app:${env.BUILD_ID}"
                 }
-                
             }
         }
     }
