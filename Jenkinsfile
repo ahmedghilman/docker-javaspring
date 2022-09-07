@@ -18,9 +18,17 @@ pipeline {
                 sh  'docker build -t gahmed/catask-app-1.0 .'
             }
         }
-        stage('Deploy') {
+        stage('Push Docker Image To DockerHub') {
             steps {
-                echo 'Deploying....'
+                echo 'Pushing Docker Image to Dockerhub....'
+                sh 'docker tag gahmed/catask-app-1.0  gahmed/catask-app:latest'
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                // some block
+                    /* groovylint-disable-next-line GStringExpressionWithinString */
+                    sh 'docker login -u gahmed -p ${dockerhubpwd}'
+                    sh 'docker push gahmed/catask-app:latest'
+                }
+                
             }
         }
     }
