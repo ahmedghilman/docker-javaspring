@@ -22,14 +22,14 @@ pipeline {
             steps {
                 echo 'Building Docker Image ..'
                 /* groovylint-disable-next-line GStringExpressionWithinString */
-                sh  'docker build -t gahmed/catask-app:${env.BUILD_ID}'
+                sh  "docker build -t gahmed/catask-app:${env.BUILD_ID}"
             }
         }
         stage('Push Docker Image To DockerHub') {
             steps {
                 echo 'Pushing Docker Image to Dockerhub....'
                 /* groovylint-disable-next-line GStringExpressionWithinString */
-                sh 'docker tag gahmed/catask-app:${env.BUILD_ID}  gahmed/catask-app:${env.BUILD_ID}'
+                sh "docker tag gahmed/catask-app:${env.BUILD_ID}  gahmed/catask-app:${env.BUILD_ID}"
                 withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
                     // some block
                     /* groovylint-disable-next-line GStringExpressionWithinString */
