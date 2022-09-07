@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image ..'
                 /* groovylint-disable-next-line GStringExpressionWithinString */
-                sh  "docker build -t gahmed/catask-app:${env.BUILD_ID}"
+                sh  "docker build -t gahmed/catask-app:${env.BUILD_ID} ."
             }
         }
         stage('Push Docker Image To DockerHub') {
