@@ -9,6 +9,7 @@ Tested with
 * Maven
 * Testing git trigger
 * Testing trigger again
+* Testing trigger again
 
 For explanation, please visit this article - [Docker and Spring Boot](https://mkyong.com/docker/docker-spring-boot-examples/)
 
