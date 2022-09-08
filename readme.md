@@ -10,6 +10,7 @@ Tested with
 * Testing git trigger
 * Testing trigger again
 * Testing trigger again
+* Testing ca-task service account
 
 For explanation, please visit this article - [Docker and Spring Boot](https://mkyong.com/docker/docker-spring-boot-examples/)
 
