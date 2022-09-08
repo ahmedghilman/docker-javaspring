@@ -3,7 +3,7 @@ This source code is an Spring Boot web application (mvc + thymeleaf).
  
 Tested with
 * Docker 19.03
-* Ubuntu 19
+* Ubuntu 19 ... currently using ubuntu 22.04
 * Java 8 or Java 11
 * Spring Boot 2.2.4.RELEASE
 * Maven
