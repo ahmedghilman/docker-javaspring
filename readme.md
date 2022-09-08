@@ -7,6 +7,7 @@ Tested with
 * Java 8 or Java 11
 * Spring Boot 2.2.4.RELEASE
 * Maven
+* Testing git trigger
 
 For explanation, please visit this article - [Docker and Spring Boot](https://mkyong.com/docker/docker-spring-boot-examples/)
 
