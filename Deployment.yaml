@@ -19,13 +19,11 @@ spec:
     spec:
       containers:
         - name: catask-app
-          image: gahmed/catask-app:tagname:tagversion
+          image: gahmed/catask-app:tagversion
           imagePullPolicy: Always
           ports:
           - containerPort: 80
             name: catask-app
-
-
 ---
 apiVersion: v1
 kind: Service
