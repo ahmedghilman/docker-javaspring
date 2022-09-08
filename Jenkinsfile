@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    environment {
+
+        PROJECT_ID = "ca-task-361717"
+        CLUSTER_NAME = "catask-cluster"
+        LOCATION = "us-central1"
+        CREDENTIALS_ID = "ca-task"
+    }
     tools{
         maven 'MAVEN'
     }
@@ -36,6 +43,19 @@ pipeline {
                     sh 'docker login -u gahmed -p ${dockerhubpwd}'
                     sh "docker push gahmed/catask-app:${env.BUILD_ID}"
                 }
+            }
+        }
+        stage('Deploy To GKE') {
+            steps {
+                echo "Deployment started ..."
+                sh "sed -i 's/tagversion/${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', \
+                  projectId: env.PROJECT_ID, \
+                  clusterName: env.CLUSTER_NAME, \
+                  location: env.LOCATION, \
+                  manifestPattern: 'deployment.yaml', \
+                  credentialsId: env.CREDENTIALS_ID, \
+                  verifyDeployments: true])
             }
         }
     }

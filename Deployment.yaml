@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catask-app
+  labels:
+    app: catask-app
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: catask-app
+      
+  template:
+    metadata:
+      labels:
+        app: catask-app
+        tier: catask-app
+    spec:
+      containers:
+        - name: catask-app
+          image: gahmed/catask-app:tagname:tagversion
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            name: catask-app
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catask-app
+  labels:
+    app: catask-app
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: catask-app
+    tier: catask-app
+  type: LoadBalancer
