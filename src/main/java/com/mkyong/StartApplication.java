@@ -12,8 +12,8 @@ public class StartApplication {
 
     @GetMapping("/")
     public String index(final Model model) {
-        model.addAttribute("title", "NISUM PIPELINE Spring Boot");
-        model.addAttribute("msg", "Welcome to the docker container!");
+        model.addAttribute("title", " Nisum Spring Boot Pipeline ");
+        model.addAttribute("msg", "Welcome to the docker container Pipeline!");
         return "index";
     }
 
